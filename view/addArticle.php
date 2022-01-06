@@ -1,9 +1,9 @@
-<form action="/addArticle" method="post">
+<form action="/addArticle" method="post" onsubmit="sendForm(this); return false;">
   <div class="mb-3">
     <input type="text" name="title" class="form-control" placeholder="Заголовок статьи">
   </div>
   <div class="mb-3">
-    <textarea name="content" class="form-control" placeholder="Текст статьи"></textarea>
+    <textarea id="sample" name="content" class="form-control" placeholder="Текст статьи"></textarea>
   </div>
   <div class="mb-3">
     <input type="text" name="author" class="form-control" placeholder="Автор">
@@ -12,3 +12,39 @@
     <input type="submit" class="form-control btn btn-primary" value="Добавить статью">
   </div>
 </form>
+<link href="https://cdn.jsdelivr.net/npm/suneditor@latest/dist/css/suneditor.min.css" rel="stylesheet">
+<!-- <link href="https://cdn.jsdelivr.net/npm/suneditor@latest/assets/css/suneditor.css" rel="stylesheet"> -->
+<!-- <link href="https://cdn.jsdelivr.net/npm/suneditor@latest/assets/css/suneditor-contents.css" rel="stylesheet"> -->
+<script src="https://cdn.jsdelivr.net/npm/suneditor@latest/dist/suneditor.min.js"></script>
+<!-- languages (Basic Language: English/en) -->
+<script src="https://cdn.jsdelivr.net/npm/suneditor@latest/src/lang/ru.js"></script>
+<script>
+    /**
+     * ID : 'suneditor_sample'
+     * ClassName : 'sun-eidtor'
+     */
+// ID or DOM object
+    const editor = SUNEDITOR.create((document.getElementById('sample') || 'sample'),{
+        // All of the plugins are loaded in the "window.SUNEDITOR" object in dist/suneditor.min.js file
+        // Insert options
+        // Language global object (default: en)
+        lang: SUNEDITOR_LANG['ru'],
+        height:'25rem';
+
+    });
+
+     function sendForm(form){
+         const content= editor.getContentsa();
+        let formData = new FormData(form);
+        formData.append('content', content);
+        fetch('addArticle',{
+            method:"POST";
+            body:formData;
+        }).then(response=>response.json)
+         .then(result=>{
+             if(result.result == 'success'){
+                 location.href = '/';
+             }
+         });
+     }
+</script>
