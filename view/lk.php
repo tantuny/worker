@@ -5,10 +5,10 @@
 <p><strong>id: </strong> <? echo $_SESSION['id']; ?></p>
 
 <script>
-  fetch('/getCurrentUser')
-    .then(response=>response.json())
-    .then(result=>{
-      username.innerText = result.name;
-      userlastname.innerText = result.lastname;
-    });
+    fetch('/getCurrentUser')
+        .then(response=>response.json())
+        .then(result=>{
+            username.innerText = result.name;
+            userlastname.innerText = result.lastname;
+        });
 </script>
