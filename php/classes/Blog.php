@@ -26,6 +26,11 @@ class Blog{
         $mysqli->query("UPDATE `articles` SET `title`='$title',`content`='$content',`author`='$author' WHERE `id`=$id");
         return (json_encode(['result'=>'success']));
     }
+     public static function deleteArticle($id){
+        global $mysqli;
+        $mysqli->query(" DELETE FROM `articles` WHERE `id`=$id");
+        return (json_encode(['result'=>'success']));
+    }
 }
 ?>
 

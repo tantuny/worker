@@ -51,8 +51,12 @@ if($uri[1] == 'reg'){
     $content = file_get_contents('view/changeArticle.php');
 }else if($uri[1]=='changeArticle' and $_SERVER['REQUEST_METHOD'] == "POST"){
     exit(Blog::changeArticle($_POST['id'], $_POST['title'], $_POST['content'], $_POST['author']));
+}else if($uri[1]=='deleteArticle' and $_SERVER['REQUEST_METHOD'] == "GET"){
+    $title = "удаление статьи";
+    $content = file_get_contents('view/deleteArticle.php');
+}else if($uri[1]=='deleteArticle' and $_SERVER['REQUEST_METHOD'] == "POST") {
+    exit(Blog::deleteArticle($_POST['id']));
 }
-
 require_once("view/template.php");
 
 ?>

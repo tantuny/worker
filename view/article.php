@@ -1,3 +1,4 @@
+
 <article class="mb-4">
     <div class="container px-4 px-lg-5">
         <div class="row gx-4 gx-lg-5 justify-content-center">
@@ -5,7 +6,9 @@
 
             </div>
             <div class="col-md-10 col-lg-8 col-xl-7" id="editBtn"></div>
-        </div>
+           </div>
+        <div class="col-md-10 col-lg-8 col-xl-7" id="delBtn"></div>
+    </div>
     </div>
 </article>
 <script>
@@ -27,4 +30,12 @@
                 editBtn.innerHTML = `<a href="/changeArticle/${id}">[Редактировать]</a>`;
             }
         })
+    fetch('/getCurrentUser')
+        .then(response=>response.json())
+        .then(result=>{
+            if(result.id != null){
+                delBtn.innerHTML = `<a href="/deleteArticle/${id}">[удалить]</a>`;
+            }
+        })
 </script>
+
